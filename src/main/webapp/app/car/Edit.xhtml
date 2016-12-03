@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      >
+    <h:head>
+        <title>Create/Edit Car</title>
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data" >
+            <h:panelGrid columns="2">
+                <h:column><h:outputLabel value="Make"/></h:column>
+                <h:column><h:inputText value="#{myCarController.current.make}"/></h:column>
+                <h:column><h:outputLabel value="Model"/></h:column>
+                <h:column><h:inputText value="#{myCarController.current.model}"/></h:column>
+                <h:column><h:inputFile value="#{myCarController.file}" /></h:column>
+                <h:column><h:commandButton value="submit" action="#{myCarController.submit}" /></h:column>
+                <h:column></h:column>
+                <h:column><o:graphicImage width="600" value="#{myCarController.getBytes()}" dataURI="true" /></h:column>
+                <h:column></h:column>
+                <h:column><h:commandButton action="#{myCarController.update()}" value="Submit..."/></h:column>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
