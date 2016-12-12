@@ -7,6 +7,7 @@ package org.csd322.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,6 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +43,34 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Car.findByYear", query = "SELECT c FROM Car c WHERE c.year = :year")})
 public class Car implements Serializable {
 
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+    @Column(name = "used")
+    private Boolean used;
+    @Size(max = 45)
+    @Column(name = "type")
+    private String type;
+    @Column(name = "mileage")
+    private Integer mileage;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "boughtFor")
+    private Double boughtFor;
+    @Column(name = "soldFor")
+    private Double soldFor;
+    @Column(name = "sellingPrice")
+    private Double sellingPrice;
+    @Column(name = "odometerKm")
+    private Double odometerKm;
+    @JoinTable(name = "special_has_car", joinColumns = {
+        @JoinColumn(name = "car_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "special_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Special> specialList;
+    @JoinColumn(name = "soldTo", referencedColumnName = "id")
+    @ManyToOne
+    private Person soldTo;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,9 +86,6 @@ public class Car implements Serializable {
     @Column(name = "year")
     @Temporal(TemporalType.DATE)
     private Date year;
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     @ManyToOne
     private Person personId;
@@ -100,13 +129,6 @@ public class Car implements Serializable {
         this.year = year;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
     public Person getPersonId() {
         return personId;
@@ -139,6 +161,87 @@ public class Car implements Serializable {
     @Override
     public String toString() {
         return "org.csd322.entities.Car[ id=" + id + " ]";
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public Boolean getUsed() {
+        return used;
+    }
+
+    public void setUsed(Boolean used) {
+        this.used = used;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(Integer mileage) {
+        this.mileage = mileage;
+    }
+
+    public Double getBoughtFor() {
+        return boughtFor;
+    }
+
+    public void setBoughtFor(Double boughtFor) {
+        this.boughtFor = boughtFor;
+    }
+
+    public Double getSoldFor() {
+        return soldFor;
+    }
+
+    public void setSoldFor(Double soldFor) {
+        this.soldFor = soldFor;
+    }
+
+    public Double getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+
+    public Double getOdometerKm() {
+        return odometerKm;
+    }
+
+    public void setOdometerKm(Double odometerKm) {
+        this.odometerKm = odometerKm;
+    }
+
+    @XmlTransient
+    public List<Special> getSpecialList() {
+        return specialList;
+    }
+
+    public void setSpecialList(List<Special> specialList) {
+        this.specialList = specialList;
+    }
+
+    public Person getSoldTo() {
+        return soldTo;
+    }
+
+    public void setSoldTo(Person soldTo) {
+        this.soldTo = soldTo;
     }
     
 }

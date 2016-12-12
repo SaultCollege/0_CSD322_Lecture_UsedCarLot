@@ -48,15 +48,63 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_personId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.personId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCarTitle_image}"/>
                             </f:facet>
                             <h:outputText value="#{item.image}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCarTitle_personId}"/>
+                                <h:outputText value="#{bundle.ListCarTitle_used}"/>
                             </f:facet>
-                            <h:outputText value="#{item.personId}"/>
+                            <h:outputText value="#{item.used}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_type}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.type}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_mileage}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mileage}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_boughtFor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.boughtFor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_soldFor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.soldFor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_sellingPrice}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sellingPrice}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_odometerKm}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.odometerKm}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_soldTo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.soldTo}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

@@ -25,10 +25,28 @@
                     <h:inputText id="year" value="#{carController.selected.year}" title="#{bundle.EditCarTitle_year}" >
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:inputText>
-                    <h:outputLabel value="#{bundle.EditCarLabel_image}" for="image" />
-                    <h:inputTextarea rows="4" cols="30" id="image" value="#{carController.selected.image}" title="#{bundle.EditCarTitle_image}" />
                     <h:outputLabel value="#{bundle.EditCarLabel_personId}" for="personId" />
                     <h:selectOneMenu id="personId" value="#{carController.selected.personId}" title="#{bundle.EditCarTitle_personId}" >
+                        <f:selectItems value="#{personController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCarLabel_image}" for="image" />
+                    <h:inputTextarea rows="4" cols="30" id="image" value="#{carController.selected.image}" title="#{bundle.EditCarTitle_image}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_used}" for="used" />
+                    <h:inputText id="used" value="#{carController.selected.used}" title="#{bundle.EditCarTitle_used}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{carController.selected.type}" title="#{bundle.EditCarTitle_type}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_mileage}" for="mileage" />
+                    <h:inputText id="mileage" value="#{carController.selected.mileage}" title="#{bundle.EditCarTitle_mileage}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_boughtFor}" for="boughtFor" />
+                    <h:inputText id="boughtFor" value="#{carController.selected.boughtFor}" title="#{bundle.EditCarTitle_boughtFor}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_soldFor}" for="soldFor" />
+                    <h:inputText id="soldFor" value="#{carController.selected.soldFor}" title="#{bundle.EditCarTitle_soldFor}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_sellingPrice}" for="sellingPrice" />
+                    <h:inputText id="sellingPrice" value="#{carController.selected.sellingPrice}" title="#{bundle.EditCarTitle_sellingPrice}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_odometerKm}" for="odometerKm" />
+                    <h:inputText id="odometerKm" value="#{carController.selected.odometerKm}" title="#{bundle.EditCarTitle_odometerKm}" />
+                    <h:outputLabel value="#{bundle.EditCarLabel_soldTo}" for="soldTo" />
+                    <h:selectOneMenu id="soldTo" value="#{carController.selected.soldTo}" title="#{bundle.EditCarTitle_soldTo}" >
                         <f:selectItems value="#{personController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
