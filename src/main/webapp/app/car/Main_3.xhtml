@@ -12,12 +12,12 @@
         <h:form>
             <h:commandButton action="#{myCarController.create()}" value="New Car..."/>
             <br/>
-            <h:commandButton action="#{myCarController.setNamedQuery('Car.findByMake')}" value="Find by Make"/>
-            <h:inputText value="#{myCarController.filter.make}"/>
-            <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
-            <br/>
             <h:commandButton action="#{myCarController.setNamedQuery('Car.findByModel')}" value="Find by Model"/>
             <h:inputText value="#{myCarController.filter.model}"/>
+            <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
+            <br/>
+            <h:commandButton action="#{myCarController.setNamedQuery('Car.findByMake')}" value="Find by Make"/>
+            <h:inputText value="#{myCarController.filter.make}"/>
             <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
             <br/>
             <h:commandButton action="#{myCarController.setNamedQuery('Car.findByYear')}" value="Find by Year"/>
@@ -25,12 +25,10 @@
             <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
             <br/>
             <h:commandButton action="#{myCarController.setNamedQuery('Car.findByMileage')}" value="Find by Mileage"/>
-            From:<h:inputText value="#{myCarController.filter.mileageFrom}"/>
-            To:<h:inputText value="#{myCarController.filter.mileageTo}"/>
+            From:<h:inputText value="#{myCarController.mileageFrom}"/>
+            To:<h:inputText value="#{myCarController.mileageTo}"/>
             <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
-
-        </h:form>
-        <h:form>
+            <br/>
             <h:dataTable bgcolor="#cecece" border="1" value="#{myCarController.cars}" var="car">
                 <h:column>
                     <f:facet name="header">Make</f:facet>

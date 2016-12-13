@@ -34,11 +34,12 @@ public class MyCarController implements Serializable {
     private MyCarFacade myFacade;
     
     private Car current;
-    private Car filter;
+    private Filter filter;
     private Part file;
     private String filename;
     private String extension;
     private String namedQuery;
+    
     
     /**
      * Creates a new instance of MyCarController
@@ -86,8 +87,18 @@ public class MyCarController implements Serializable {
             return b;
     }
     public List<Car> getCars(){
-        if(namedQuery!=null && namedQuery.equals("Car.findByMake")){
+        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByMake")){
             return myFacade.findByMake(filter.getMake());
+        }
+        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByModel")){
+            return myFacade.findByModel(filter.getModel());
+        }
+        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByYear")){
+            return myFacade.findByYear(filter.getYear());
+        }
+        
+        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByMileage")){
+            return myFacade.findByMileage(filter.getMileageFrom(), filter.getMileageTo());
         }
             
         List<Car> list=null;
@@ -189,23 +200,27 @@ public class MyCarController implements Serializable {
      * @param namedQuery the namedQuery to set
      */
     public void setNamedQuery(String namedQuery) {
+        if(namedQuery.isEmpty()){
+            filter=new Filter();
+        }
         this.namedQuery = namedQuery;
     }
 
     /**
      * @return the filter
      */
-    public Car getFilter() {
+    public Filter getFilter() {
         if(filter==null)
-            filter=new Car();
+            filter=new Filter();
         return filter;
     }
 
     /**
      * @param filter the filter to set
      */
-    public void setFilter(Car filter) {
+    public void setFilter(Filter filter) {
         this.filter = filter;
     }
 
+    
 }
