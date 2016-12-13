@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.csd322.facades;
+package org.csd322.sessionbeans;
 
 import java.util.List;
 import javax.persistence.EntityManager;

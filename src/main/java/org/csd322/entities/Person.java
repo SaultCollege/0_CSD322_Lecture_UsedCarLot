@@ -47,7 +47,7 @@ public class Person implements Serializable {
     @Size(max = 45)
     @Column(name = "lastname")
     private String lastname;
-    @OneToMany(mappedBy = "personId")
+    @OneToMany(mappedBy = "soldTo")
     private List<Car> carList;
 
     public Person() {

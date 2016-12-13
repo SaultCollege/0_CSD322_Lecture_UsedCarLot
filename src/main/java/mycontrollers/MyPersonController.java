@@ -10,7 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import org.csd322.entities.Person;
-import org.csd322.facades.PersonFacade;
+import org.csd322.sessionbeans.PersonFacade;
 
 /**
  *

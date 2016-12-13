@@ -1,4 +1,4 @@
-package org.csd322.controllers.util;
+package org.csd322.jsfclasses.util;
 
 import javax.faces.model.DataModel;
 

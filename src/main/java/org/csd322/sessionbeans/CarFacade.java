@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.csd322.facades;
+package org.csd322.sessionbeans;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.csd322.entities.Special;
+import org.csd322.entities.Car;
 
 /**
  *
  * @author fred
  */
 @Stateless
-public class SpecialFacade extends AbstractFacade<Special> {
+public class CarFacade extends AbstractFacade<Car> {
 
     @PersistenceContext(unitName = "ca.saultcollege_0_UsedCarLot_war_1.0PU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class SpecialFacade extends AbstractFacade<Special> {
         return em;
     }
 
-    public SpecialFacade() {
-        super(Special.class);
+    public CarFacade() {
+        super(Car.class);
     }
     
 }

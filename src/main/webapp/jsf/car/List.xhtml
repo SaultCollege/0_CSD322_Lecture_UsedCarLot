@@ -48,12 +48,6 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCarTitle_personId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.personId}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCarTitle_image}"/>
                             </f:facet>
                             <h:outputText value="#{item.image}"/>
@@ -69,12 +63,6 @@
                                 <h:outputText value="#{bundle.ListCarTitle_type}"/>
                             </f:facet>
                             <h:outputText value="#{item.type}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCarTitle_mileage}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mileage}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -99,6 +87,22 @@
                                 <h:outputText value="#{bundle.ListCarTitle_odometerKm}"/>
                             </f:facet>
                             <h:outputText value="#{item.odometerKm}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_dateReceived}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateReceived}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCarTitle_dateSold}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateSold}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

@@ -1,9 +1,9 @@
-package org.csd322.controllers;
+package org.csd322.jsfclasses;
 
 import org.csd322.entities.Person;
-import org.csd322.controllers.util.JsfUtil;
-import org.csd322.controllers.util.PaginationHelper;
-import org.csd322.facades.PersonFacade;
+import org.csd322.jsfclasses.util.JsfUtil;
+import org.csd322.jsfclasses.util.PaginationHelper;
+import org.csd322.sessionbeans.PersonFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -25,7 +25,7 @@ public class PersonController implements Serializable {
     private Person current;
     private DataModel items = null;
     @EJB
-    private org.csd322.facades.PersonFacade ejbFacade;
+    private org.csd322.sessionbeans.PersonFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 

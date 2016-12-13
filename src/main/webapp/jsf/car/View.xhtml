@@ -25,16 +25,12 @@
                     <h:outputText value="#{carController.selected.year}" title="#{bundle.ViewCarTitle_year}">
                         <f:convertDateTime pattern="MM/dd/yyyy" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewCarLabel_personId}"/>
-                    <h:outputText value="#{carController.selected.personId}" title="#{bundle.ViewCarTitle_personId}"/>
                     <h:outputText value="#{bundle.ViewCarLabel_image}"/>
                     <h:outputText value="#{carController.selected.image}" title="#{bundle.ViewCarTitle_image}"/>
                     <h:outputText value="#{bundle.ViewCarLabel_used}"/>
                     <h:outputText value="#{carController.selected.used}" title="#{bundle.ViewCarTitle_used}"/>
                     <h:outputText value="#{bundle.ViewCarLabel_type}"/>
                     <h:outputText value="#{carController.selected.type}" title="#{bundle.ViewCarTitle_type}"/>
-                    <h:outputText value="#{bundle.ViewCarLabel_mileage}"/>
-                    <h:outputText value="#{carController.selected.mileage}" title="#{bundle.ViewCarTitle_mileage}"/>
                     <h:outputText value="#{bundle.ViewCarLabel_boughtFor}"/>
                     <h:outputText value="#{carController.selected.boughtFor}" title="#{bundle.ViewCarTitle_boughtFor}"/>
                     <h:outputText value="#{bundle.ViewCarLabel_soldFor}"/>
@@ -43,6 +39,14 @@
                     <h:outputText value="#{carController.selected.sellingPrice}" title="#{bundle.ViewCarTitle_sellingPrice}"/>
                     <h:outputText value="#{bundle.ViewCarLabel_odometerKm}"/>
                     <h:outputText value="#{carController.selected.odometerKm}" title="#{bundle.ViewCarTitle_odometerKm}"/>
+                    <h:outputText value="#{bundle.ViewCarLabel_dateReceived}"/>
+                    <h:outputText value="#{carController.selected.dateReceived}" title="#{bundle.ViewCarTitle_dateReceived}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCarLabel_dateSold}"/>
+                    <h:outputText value="#{carController.selected.dateSold}" title="#{bundle.ViewCarTitle_dateSold}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                     <h:outputText value="#{bundle.ViewCarLabel_soldTo}"/>
                     <h:outputText value="#{carController.selected.soldTo}" title="#{bundle.ViewCarTitle_soldTo}"/>
                 </h:panelGrid>

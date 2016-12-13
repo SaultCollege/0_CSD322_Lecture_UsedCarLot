@@ -1,9 +1,9 @@
-package org.csd322.controllers;
+package org.csd322.jsfclasses;
 
-import org.csd322.entities.Special;
-import org.csd322.controllers.util.JsfUtil;
-import org.csd322.controllers.util.PaginationHelper;
-import org.csd322.facades.SpecialFacade;
+import org.csd322.entities.Car;
+import org.csd322.jsfclasses.util.JsfUtil;
+import org.csd322.jsfclasses.util.PaginationHelper;
+import org.csd322.sessionbeans.CarFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,29 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("specialController")
+@Named("carController")
 @SessionScoped
-public class SpecialController implements Serializable {
+public class CarController implements Serializable {
 
-    private Special current;
+    private Car current;
     private DataModel items = null;
     @EJB
-    private org.csd322.facades.SpecialFacade ejbFacade;
+    private org.csd322.sessionbeans.CarFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public SpecialController() {
+    public CarController() {
     }
 
-    public Special getSelected() {
+    public Car getSelected() {
         if (current == null) {
-            current = new Special();
+            current = new Car();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private SpecialFacade getFacade() {
+    private CarFacade getFacade() {
         return ejbFacade;
     }
 
@@ -68,13 +68,13 @@ public class SpecialController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Special) getItems().getRowData();
+        current = (Car) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Special();
+        current = new Car();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -82,7 +82,7 @@ public class SpecialController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SpecialCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -91,7 +91,7 @@ public class SpecialController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Special) getItems().getRowData();
+        current = (Car) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -99,7 +99,7 @@ public class SpecialController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SpecialUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -108,7 +108,7 @@ public class SpecialController implements Serializable {
     }
 
     public String destroy() {
-        current = (Special) getItems().getRowData();
+        current = (Car) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,7 +132,7 @@ public class SpecialController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SpecialDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -188,21 +188,21 @@ public class SpecialController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Special getSpecial(java.lang.Integer id) {
+    public Car getCar(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Special.class)
-    public static class SpecialControllerConverter implements Converter {
+    @FacesConverter(forClass = Car.class)
+    public static class CarControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SpecialController controller = (SpecialController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "specialController");
-            return controller.getSpecial(getKey(value));
+            CarController controller = (CarController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "carController");
+            return controller.getCar(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -222,11 +222,11 @@ public class SpecialController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Special) {
-                Special o = (Special) object;
+            if (object instanceof Car) {
+                Car o = (Car) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Special.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Car.class.getName());
             }
         }
 

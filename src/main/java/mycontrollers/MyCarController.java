@@ -15,10 +15,11 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.servlet.http.Part;
+import myfacades.MyCarFacade;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.csd322.entities.Car;
-import org.csd322.facades.CarFacade;
+import org.csd322.sessionbeans.CarFacade;
 
 /**
  *
@@ -29,16 +30,24 @@ import org.csd322.facades.CarFacade;
 public class MyCarController implements Serializable {
     @EJB
     private CarFacade facade;
+    @EJB
+    private MyCarFacade myFacade;
     
     private Car current;
+    private Car filter;
     private Part file;
     private String filename;
     private String extension;
+    private String namedQuery;
     
     /**
      * Creates a new instance of MyCarController
      */
     public MyCarController() {
+    }
+    
+    public void setQuery(){
+        
     }
     public String submit() {
 //        setCurrent(new Car());
@@ -77,6 +86,10 @@ public class MyCarController implements Serializable {
             return b;
     }
     public List<Car> getCars(){
+        if(namedQuery!=null && namedQuery.equals("Car.findByMake")){
+            return myFacade.findByMake(filter.getMake());
+        }
+            
         List<Car> list=null;
         list=getFacade().findAll();
         return list;
@@ -163,6 +176,36 @@ public class MyCarController implements Serializable {
      */
     public void setExtension(String extension) {
         this.extension = extension;
+    }
+
+    /**
+     * @return the namedQuery
+     */
+    public String getNamedQuery() {
+        return namedQuery;
+    }
+
+    /**
+     * @param namedQuery the namedQuery to set
+     */
+    public void setNamedQuery(String namedQuery) {
+        this.namedQuery = namedQuery;
+    }
+
+    /**
+     * @return the filter
+     */
+    public Car getFilter() {
+        if(filter==null)
+            filter=new Car();
+        return filter;
+    }
+
+    /**
+     * @param filter the filter to set
+     */
+    public void setFilter(Car filter) {
+        this.filter = filter;
     }
 
 }

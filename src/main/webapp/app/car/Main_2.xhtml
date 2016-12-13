@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <style type="text/css">
+            div.inline { float:left; }
+            .clearBoth { clear:both; }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton action="#{myCarController.create()}" value="New Car..."/>
+            <br/>
+            <div style="border-style: dashed;color:red;">
+                <ui:repeat value="#{myCarController.cars}" var="car">
+                    <div class="inline">
+                        <h:outputLabel value="#{car.make}"/>
+                    </div>
+                    <div class="inline">
+                        <h:outputLabel value=" #{car.model}"/>
+                    </div>
+                    <div class="inline">
+                        <h:outputLabel value=" #{car.year}"/>
+                    </div>
+                    <div class="inline">
+                        <o:graphicImage width="400" value="#{car.image}" dataURI="true" />
+                    </div>
+                    <div class="inline">
+                        <h:commandButton action="#{myCarController.edit(car)}" value="Edit..."/>
+                    </div>
+                </ui:repeat>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

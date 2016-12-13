@@ -40,36 +40,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Car.findById", query = "SELECT c FROM Car c WHERE c.id = :id"),
     @NamedQuery(name = "Car.findByMake", query = "SELECT c FROM Car c WHERE c.make = :make"),
     @NamedQuery(name = "Car.findByModel", query = "SELECT c FROM Car c WHERE c.model = :model"),
-    @NamedQuery(name = "Car.findByYear", query = "SELECT c FROM Car c WHERE c.year = :year")})
+    @NamedQuery(name = "Car.findByYear", query = "SELECT c FROM Car c WHERE c.year = :year"),
+    @NamedQuery(name = "Car.findByUsed", query = "SELECT c FROM Car c WHERE c.used = :used"),
+    @NamedQuery(name = "Car.findByType", query = "SELECT c FROM Car c WHERE c.type = :type"),
+    @NamedQuery(name = "Car.findByBoughtFor", query = "SELECT c FROM Car c WHERE c.boughtFor = :boughtFor"),
+    @NamedQuery(name = "Car.findBySoldFor", query = "SELECT c FROM Car c WHERE c.soldFor = :soldFor"),
+    @NamedQuery(name = "Car.findBySellingPrice", query = "SELECT c FROM Car c WHERE c.sellingPrice = :sellingPrice"),
+    @NamedQuery(name = "Car.findByOdometerKm", query = "SELECT c FROM Car c WHERE c.odometerKm = :odometerKm"),
+    @NamedQuery(name = "Car.findByDateReceived", query = "SELECT c FROM Car c WHERE c.dateReceived = :dateReceived"),
+    @NamedQuery(name = "Car.findByDateSold", query = "SELECT c FROM Car c WHERE c.dateSold = :dateSold")})
 public class Car implements Serializable {
-
-    @Lob
-    @Column(name = "image")
-    private byte[] image;
-    @Column(name = "used")
-    private Boolean used;
-    @Size(max = 45)
-    @Column(name = "type")
-    private String type;
-    @Column(name = "mileage")
-    private Integer mileage;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "boughtFor")
-    private Double boughtFor;
-    @Column(name = "soldFor")
-    private Double soldFor;
-    @Column(name = "sellingPrice")
-    private Double sellingPrice;
-    @Column(name = "odometerKm")
-    private Double odometerKm;
-    @JoinTable(name = "special_has_car", joinColumns = {
-        @JoinColumn(name = "car_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "special_id", referencedColumnName = "id")})
-    @ManyToMany
-    private List<Special> specialList;
-    @JoinColumn(name = "soldTo", referencedColumnName = "id")
-    @ManyToOne
-    private Person soldTo;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -86,9 +66,37 @@ public class Car implements Serializable {
     @Column(name = "year")
     @Temporal(TemporalType.DATE)
     private Date year;
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+    @Column(name = "used")
+    private Boolean used;
+    @Size(max = 45)
+    @Column(name = "type")
+    private String type;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "boughtFor")
+    private Double boughtFor;
+    @Column(name = "soldFor")
+    private Double soldFor;
+    @Column(name = "sellingPrice")
+    private Double sellingPrice;
+    @Column(name = "odometerKm")
+    private Double odometerKm;
+    @Column(name = "dateReceived")
+    @Temporal(TemporalType.DATE)
+    private Date dateReceived;
+    @Column(name = "dateSold")
+    @Temporal(TemporalType.DATE)
+    private Date dateSold;
+    @JoinTable(name = "special_has_car", joinColumns = {
+        @JoinColumn(name = "car_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "special_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Special> specialList;
+    @JoinColumn(name = "soldTo", referencedColumnName = "id")
     @ManyToOne
-    private Person personId;
+    private Person soldTo;
 
     public Car() {
     }
@@ -129,41 +137,9 @@ public class Car implements Serializable {
         this.year = year;
     }
 
-
-    public Person getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Person personId) {
-        this.personId = personId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Car)) {
-            return false;
-        }
-        Car other = (Car) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "org.csd322.entities.Car[ id=" + id + " ]";
-    }
-
     public byte[] getImage() {
+        if(image==null)
+            image=new byte[0];
         return image;
     }
 
@@ -185,14 +161,6 @@ public class Car implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Integer getMileage() {
-        return mileage;
-    }
-
-    public void setMileage(Integer mileage) {
-        this.mileage = mileage;
     }
 
     public Double getBoughtFor() {
@@ -227,6 +195,22 @@ public class Car implements Serializable {
         this.odometerKm = odometerKm;
     }
 
+    public Date getDateReceived() {
+        return dateReceived;
+    }
+
+    public void setDateReceived(Date dateReceived) {
+        this.dateReceived = dateReceived;
+    }
+
+    public Date getDateSold() {
+        return dateSold;
+    }
+
+    public void setDateSold(Date dateSold) {
+        this.dateSold = dateSold;
+    }
+
     @XmlTransient
     public List<Special> getSpecialList() {
         return specialList;
@@ -242,6 +226,31 @@ public class Car implements Serializable {
 
     public void setSoldTo(Person soldTo) {
         this.soldTo = soldTo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Car)) {
+            return false;
+        }
+        Car other = (Car) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "org.csd322.entities.Car[ id=" + id + " ]";
     }
     
 }
