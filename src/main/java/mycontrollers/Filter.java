@@ -16,7 +16,9 @@ public class Filter {
     private int year;
     private String make;
     private String model;
-
+    private int sellingPriceFrom;
+    private int sellingPriceTo;
+    
     public Filter() {
     }
 
@@ -88,6 +90,34 @@ public class Filter {
      */
     public void setModel(String model) {
         this.model = model;
+    }
+
+    /**
+     * @return the sellingPriceFrom
+     */
+    public int getSellingPriceFrom() {
+        return sellingPriceFrom;
+    }
+
+    /**
+     * @param sellingPriceFrom the sellingPriceFrom to set
+     */
+    public void setSellingPriceFrom(int sellingPriceFrom) {
+        this.sellingPriceFrom = sellingPriceFrom;
+    }
+
+    /**
+     * @return the sellingPriceTo
+     */
+    public int getSellingPriceTo() {
+        return sellingPriceTo;
+    }
+
+    /**
+     * @param sellingPriceTo the sellingPriceTo to set
+     */
+    public void setSellingPriceTo(int sellingPriceTo) {
+        this.sellingPriceTo = sellingPriceTo;
     }
 
 }

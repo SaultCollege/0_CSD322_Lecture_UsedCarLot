@@ -10,6 +10,8 @@
     </h:head>
     <h:body>
         <h:form>
+            <h:link value="Home..." outcome="/index"/>
+            <br/>
             <h:commandButton action="#{myCarController.create()}" value="New Car..."/>
             <br/>
             <h:commandButton action="#{myCarController.setNamedQuery('Car.findByMake')}" value="Find by Make"/>
@@ -28,6 +30,11 @@
             From:<h:inputText value="#{myCarController.filter.mileageFrom}"/>
             To:<h:inputText value="#{myCarController.filter.mileageTo}"/>
             <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
+            <br/>
+            <h:commandButton action="#{myCarController.setNamedQuery('Car.findBySellingPrice')}" value="Find by Selling Price"/>
+            From:<h:inputText value="#{myCarController.filter.sellingPriceFrom}"/>
+            To:<h:inputText value="#{myCarController.filter.sellingPriceTo}"/>
+            <h:commandButton action="#{myCarController.setNamedQuery(null)}" value="Clear"/>
 
         </h:form>
         <h:form>
@@ -45,6 +52,10 @@
                     <h:outputText value="#{car.year}">
                         <f:convertDateTime pattern="yyyy" />
                     </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Type</f:facet>
+                    <h:outputText value="#{car.type}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Image</f:facet>
@@ -89,10 +100,11 @@
                     </h:outputText>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Specials</f:facet>
+                    <f:facet name="header">Specials <h:commandLink action="/app/specials" value="(All)"/></f:facet>
                     <h:link rendered="#{!empty car.specialList}" value="Specials..."/>
                 </h:column>
                 <h:column><h:commandButton action="#{myCarController.edit(car)}" value="Edit..."/></h:column>
+                <h:column><h:commandButton  onclick="return confirm('Are you sure?')" action="#{myCarController.delete(car)}" value="Delete..."/></h:column>
             </h:dataTable>
         </h:form>
     </h:body>

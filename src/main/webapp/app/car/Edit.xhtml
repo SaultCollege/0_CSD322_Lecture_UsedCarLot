@@ -3,24 +3,67 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:o="http://omnifaces.org/ui"
-      xmlns:of="http://omnifaces.org/functions"
-      >
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Create/Edit Car</title>
     </h:head>
     <h:body>
         <h:form enctype="multipart/form-data" >
-            <h:panelGrid columns="2">
+            <h:link value="Home..." outcome="/index"/>
+            <br/>
+            <h:panelGrid columns="3">
                 <h:column><h:outputLabel value="Make"/></h:column>
-                <h:column><h:inputText value="#{myCarController.current.make}"/></h:column>
+                <h:column><h:inputText id="make" value="#{myCarController.current.make}"/></h:column>
+                <h:message for="make" />
+                
                 <h:column><h:outputLabel value="Model"/></h:column>
-                <h:column><h:inputText value="#{myCarController.current.model}"/></h:column>
+                <h:column><h:inputText id="model" value="#{myCarController.current.model}"/></h:column>
+                <h:message for="model" />
+                
                 <h:column><h:inputFile value="#{myCarController.file}" /></h:column>
                 <h:column><h:commandButton value="submit" action="#{myCarController.submit}" /></h:column>
                 <h:column></h:column>
+                
+                <h:column></h:column>
                 <h:column><o:graphicImage width="600" value="#{myCarController.getBytes()}" dataURI="true" /></h:column>
                 <h:column></h:column>
+                
+                <h:column><h:outputLabel value="Year"/></h:column>
+                <h:column><h:inputText id="year" required="true" requiredMessage="Year is required" value="#{myCarController.year}"/></h:column>
+                <h:message for="year" />
+                
+                <h:column><h:outputLabel value="Odometer Km"/></h:column>
+                <h:column><h:inputText id="odo" required="true" requiredMessage="Odometer is required" value="#{myCarController.current.odometerKm}"/></h:column>
+                <h:message for="odo" />
+
+                <h:column><h:outputLabel value="Selling Price"/></h:column>
+                <h:column><h:inputText id="sellingprice" required="true" requiredMessage="Odometer is required" value="#{myCarController.current.sellingPrice}"/></h:column>
+                <h:message for="sellingprice" />
+
+                <h:column><h:outputLabel value="Bought For"/></h:column>
+                <h:column><h:inputText id="boughtfor" required="true" requiredMessage="Odometer is required" value="#{myCarController.current.boughtFor}"/></h:column>
+                <h:message for="boughtfor" />
+
+                <h:column><h:outputLabel value="Sold For"/></h:column>
+                <h:column><h:inputText id="soldfor" required="true" requiredMessage="Odometer is required" value="#{myCarController.current.soldFor}"/></h:column>
+                <h:message for="soldfor" />
+
+                <h:column><h:outputLabel value="Pre-owned?"/></h:column>
+                <h:column><h:selectBooleanCheckbox id="used" value="#{myCarController.current.used}" /></h:column>
+                <h:message for="used" />
+                
+                <h:column><h:outputLabel value="Body Style"/></h:column>
+                <h:selectOneMenu id="body-style" value="#{myCarController.current.type}">
+                    <f:selectItems value="#{myCarController.types}" />
+   		</h:selectOneMenu>
+                <h:message for="body-style" />
+                
+                <h:column></h:column>
                 <h:column><h:commandButton action="#{myCarController.update()}" value="Submit..."/></h:column>
+                <h:column></h:column>
+                
+                
             </h:panelGrid>
         </h:form>
     </h:body>

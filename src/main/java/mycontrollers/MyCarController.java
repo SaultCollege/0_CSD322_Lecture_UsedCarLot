@@ -8,7 +8,12 @@ package mycontrollers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -28,28 +33,44 @@ import org.csd322.sessionbeans.CarFacade;
 @Named(value = "myCarController")
 @SessionScoped
 public class MyCarController implements Serializable {
+
     @EJB
     private CarFacade facade;
     @EJB
     private MyCarFacade myFacade;
-    
+
     private Car current;
     private Filter filter;
     private Part file;
     private String filename;
     private String extension;
     private String namedQuery;
-    
-    
+    private Integer year;
+    // See https://www.mkyong.com/jsf2/jsf-2-dropdown-box-example/
+    private static Map<String, Object> types;
+    static {
+        types = new LinkedHashMap<>();
+        types.put("Sedan", "Sedan"); //label, value
+        types.put("Coupe", "Coupe");
+        types.put("Cargo Van", "Cargo Van");
+        types.put("Hatchback", "Hatchback");
+        types.put("Passenger Van", "Passenger Van");
+        types.put("Pickup", "Pickup");
+        types.put("SUV", "SUV");
+    }
+    public Map getTypes(){
+        return types;
+    }
     /**
      * Creates a new instance of MyCarController
      */
     public MyCarController() {
     }
-    
-    public void setQuery(){
-        
+
+    public void setQuery() {
+
     }
+
     public String submit() {
 //        setCurrent(new Car());
 //        getFacade().create(getCurrent());
@@ -76,49 +97,62 @@ public class MyCarController implements Serializable {
     }
 
     public byte[] getBytes() {
-        byte[] b=new byte[0];
-        if(getCurrent()!=null){
+        byte[] b = new byte[0];
+        if (getCurrent() != null) {
             Car i = facade.find(getCurrent().getId());
             byte[] img = i.getImage();
-            if(img==null)
+            if (img == null) {
                 return b;
+            }
             return img;
-        }else
+        } else {
             return b;
+        }
     }
-    public List<Car> getCars(){
-        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByMake")){
+
+    public List<Car> getCars() {
+        if (getNamedQuery() != null && getNamedQuery().equals("Car.findByMake")) {
             return myFacade.findByMake(filter.getMake());
         }
-        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByModel")){
+        if (getNamedQuery() != null && getNamedQuery().equals("Car.findByModel")) {
             return myFacade.findByModel(filter.getModel());
         }
-        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByYear")){
+        if (getNamedQuery() != null && getNamedQuery().equals("Car.findByYear")) {
             return myFacade.findByYear(filter.getYear());
         }
-        
-        if(getNamedQuery()!=null && getNamedQuery().equals("Car.findByMileage")){
+        if (getNamedQuery() != null && getNamedQuery().equals("Car.findByMileage")) {
             return myFacade.findByMileage(filter.getMileageFrom(), filter.getMileageTo());
         }
-            
-        List<Car> list=null;
-        list=getFacade().findAll();
+        if (getNamedQuery() != null && getNamedQuery().equals("Car.findBySellingPrice")) {
+            return myFacade.findBySellingPrice(filter.getSellingPriceFrom(), filter.getSellingPriceTo());
+        }
+
+        List<Car> list = null;
+        list = getFacade().findAll();
         return list;
     }
-    public String edit(Car car){
+
+    public String edit(Car car) {
         setCurrent(car);
         return "Edit";
     }
-    public String create(){
-        Car c=new Car();
+
+    public String create() {
+        Car c = new Car();
         facade.create(c);
         return edit(c);
     }
 
-    public String update(){
+    public String update() {
         getFacade().edit(getCurrent());
         return "Main";
     }
+
+    public String delete(Car car) {
+        getFacade().remove(car);
+        return "Main";
+    }
+
     /**
      * @return the facade
      */
@@ -200,8 +234,8 @@ public class MyCarController implements Serializable {
      * @param namedQuery the namedQuery to set
      */
     public void setNamedQuery(String namedQuery) {
-        if(namedQuery.isEmpty()){
-            filter=new Filter();
+        if (namedQuery.isEmpty()) {
+            filter = new Filter();
         }
         this.namedQuery = namedQuery;
     }
@@ -210,8 +244,9 @@ public class MyCarController implements Serializable {
      * @return the filter
      */
     public Filter getFilter() {
-        if(filter==null)
-            filter=new Filter();
+        if (filter == null) {
+            filter = new Filter();
+        }
         return filter;
     }
 
@@ -222,5 +257,43 @@ public class MyCarController implements Serializable {
         this.filter = filter;
     }
 
-    
+    /**
+     * @return the year
+     */
+    public Integer getYear() {
+        Date yr = current.getYear();
+        if (yr == null) {
+            return null;
+        }
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(yr);
+        year = calendar.get(Calendar.YEAR);
+        return year;
+    }
+
+    /**
+     * @param year the year to set
+     */
+    public void setYear(Integer year) {
+        this.year = year;
+        Date yr = current.getYear();
+        if (yr == null) {
+            yr = new Date();
+        }
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(yr);
+        calendar.set(Calendar.YEAR, year);
+        current.setYear(calendar.getTime());
+//        yr.setYear(year);
+    }
+    /*
+        Date yr = current.getYear();
+        if(yr==null)
+            yr=new Date();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(yr);
+        calendar.set(Calendar.YEAR, year);
+        yr.setYear(year);
+     */
+
 }

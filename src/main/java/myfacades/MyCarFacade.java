@@ -5,7 +5,6 @@
  */
 package myfacades;
 
-import java.util.Date;
 import java.util.List;
 import org.csd322.sessionbeans.AbstractFacade;
 import javax.ejb.Stateless;
@@ -56,6 +55,12 @@ public class MyCarFacade extends AbstractFacade<Car> {
     }
     public List<Car> findByMileage(int from, int to) {
         Query query = em.createQuery("Select e " + "from Car e " + "where e.odometerKm " + "Between "+from+" and "+to);
+     
+        List<Car> results = query.getResultList();
+        return results;
+    }
+    public List<Car> findBySellingPrice(int from, int to) {
+        Query query = em.createQuery("Select e " + "from Car e " + "where e.selllingPrice " + "Between "+from+" and "+to);
      
         List<Car> results = query.getResultList();
         return results;
