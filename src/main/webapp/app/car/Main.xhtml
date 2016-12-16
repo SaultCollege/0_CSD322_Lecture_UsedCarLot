@@ -100,7 +100,7 @@
                     </h:outputText>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Specials <h:commandLink action="/app/specials" value="(All)"/></f:facet>
+                    <f:facet name="header">Specials <h:commandLink action="/app/specials/Main" value="(All)"/></f:facet>
                     <h:link rendered="#{!empty car.specialList}" value="Specials..."/>
                 </h:column>
                 <h:column><h:commandButton action="#{myCarController.edit(car)}" value="Edit..."/></h:column>
