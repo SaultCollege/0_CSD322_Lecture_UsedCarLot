@@ -48,6 +48,7 @@ public class MyCarController implements Serializable {
     private Integer year;
     // See https://www.mkyong.com/jsf2/jsf-2-dropdown-box-example/
     private static Map<String, Object> types;
+
     static {
         types = new LinkedHashMap<>();
         types.put("Sedan", "Sedan"); //label, value
@@ -58,9 +59,11 @@ public class MyCarController implements Serializable {
         types.put("Pickup", "Pickup");
         types.put("SUV", "SUV");
     }
-    public Map getTypes(){
+
+    public Map getTypes() {
         return types;
     }
+
     /**
      * Creates a new instance of MyCarController
      */
@@ -69,6 +72,10 @@ public class MyCarController implements Serializable {
 
     public void setQuery() {
 
+    }
+
+    public String getAudioFile() {
+        return "<audio src='mi.mp3' controls=''/>";//    autoplay='off'/>";
     }
 
     public String submit() {
